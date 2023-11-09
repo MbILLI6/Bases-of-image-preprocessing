@@ -13,7 +13,10 @@ def rect(x): #needs list x
     return np.where(abs(x)<=0.5, 1, 0)
 def tr(n):
     return triang(n)
-
+def sin(x):
+    return np.sin(x)
+    
+    
 N = 1024
 step = (1/N)**(1/2)
 x_max = step * (N/2)
@@ -29,6 +32,10 @@ y_rect = fftshift(fft(rect))
 
 tr = tr(N)
 y_tr = fftshift(fft(tr))
+
+sin = sin(x)
+y_sin = fft(sin)
+
 
 plt.figure(1)
 plt.subplot(211)
@@ -48,3 +55,8 @@ plt.plot(x_tr, tr)
 plt.subplot(212)
 plt.plot(x_tr,y_tr)
 
+plt.figure(4)
+plt.subplot(211)
+plt.plot(x, sin)
+plt.subplot(212)
+plt.plot(x,y_sin)
