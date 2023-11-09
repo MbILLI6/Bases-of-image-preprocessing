@@ -18,6 +18,7 @@ N = 1024
 step = (1/N)**(1/2)
 x_max = step * (N/2)
 x = np.arange(-x_max, x_max, step)
+x_tr = np.arange(-1, 1, 1/512 )
 
 delta_function = delta(N)
 y_delta = fftshift(fft(fftshift(delta_function)))
@@ -43,7 +44,7 @@ plt.plot(x,y_rect)
 
 plt.figure(3)
 plt.subplot(211)
-plt.plot(x, tr)
+plt.plot(x_tr, tr)
 plt.subplot(212)
-plt.plot(x,y_tr)
+plt.plot(x_tr,y_tr)
 
