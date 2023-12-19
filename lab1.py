@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 from scipy.fft import fft, ifft, fftshift
-from scipy.signal import triang
+from scipy.signal.windows import triang
 import numpy as np
 
 def delta(n): #needs length N
