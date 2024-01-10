@@ -35,6 +35,7 @@ def func_rect(x, N):
 
 
 def plot2(f_func, intensity, N, x, y, x_max, title1, title2):
+
     plt.figure(figsize=(12, 8))
 
     plt.subplot(231)
@@ -44,7 +45,7 @@ def plot2(f_func, intensity, N, x, y, x_max, title1, title2):
     plt.title(title1)
 
     plt.subplot(232)
-    plt.plot(x[N//2 + 1, :], f_func[N//2 + 1, :], y[:, N//2 + 1], f_func[:, N//2 + 1])
+    plt.plot(x[N//2, :], f_func[N//2, :], y[:, N//2], f_func[:, N//2])
     plt.title("Two coordinate slise")
 
     plt.subplot(234)
@@ -54,8 +55,12 @@ def plot2(f_func, intensity, N, x, y, x_max, title1, title2):
     plt.title(title2)
 
     plt.subplot(235)
-    plt.plot(x[N//2 + 1, :], intensity[N // 2 + 1, :], y[:, N // 2 + 1], intensity[:, N // 2 + 1])
+    plt.plot(x[N // 2, :], intensity[N // 2, :]/np.max(intensity), label='Slice along X-axis')
+    plt.plot(y[:, N // 2], intensity[:, N // 2]/np.max(intensity), label='Slice along Y-axis')
+    plt.legend()
     plt.title("Two coordinate slise")
+
+
 
     plt.show()
 
@@ -66,7 +71,7 @@ def func124(f_func, N, x, y, x_max, title1, title2):
     f_func_fft_shift = np.fft.fftshift(f_func_fft)
 
     f_func_fft_shift = f_func_fft_shift / N
-    intensity = np.abs(f_func_fft_shift) ** 2
+    intensity = np.abs(f_func_fft_shift)**2
     plot2(f_func, intensity, N, x, y, x_max, title1, title2)
 
 
@@ -106,14 +111,14 @@ x, y = np.meshgrid(np.arange(-x_max, x_max, step), np.arange(-x_max, x_max, step
 # First part
 f_func = func_rect2(x, 2 * y, N)
 title1 = "Gap by Rect function"
-title2 = "Intensity by Fraunhofer diffraction"
+title2 = "Intensity with Fraunhofer diffraction"
 func124(f_func, N, x, y, x_max, title1, title2)  # for direct Fourier
 
 # Second part
 step_1mm = int(np.ceil(1 / step))   # number of counts for +/- 1 mm
 f_func = func_delta2(N, step_1mm) + func_delta2(N, -step_1mm)
 title1 = "Two narrow gaps"
-title2 = "Intensity by Fraunhofer diffraction"
+title2 = "Intensity with Fraunhofer diffraction"
 func124(f_func, N, x, y, x_max, title1, title2)
 
 # Third part
@@ -141,5 +146,5 @@ for i in range(1, 6):
     b = i * 1e-01  
     f_func = func_rect((x + 1) / b, N) + func_rect((x - 1) / b, N)
     title1 = f"Two gaps with size of b={b:.1f}"
-    title2 = "Intensity by Fraunhofer diffraction"
+    title2 = "Intensity with Fraunhofer diffraction"
     func124(f_func, N, x, y, x_max, title1, title2)
