@@ -98,7 +98,6 @@ D_abs = np.abs(D_norm)
 # ФРТ
 FRT = (np.abs(FRT_) * np.abs(FRT_)) / (np.pi ** 2)
 
-# Для решетки – раскомментировать вывод всех последующих графиков:
 # % Срез ФРТ, ФРТ
 plt.figure(5)
 plt.plot(x[N // 2 + 1, :], FRT[N // 2 + 1, :], color='r', linewidth=1.3)
