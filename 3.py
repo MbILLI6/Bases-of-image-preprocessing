@@ -36,7 +36,7 @@ nx, ny = np.meshgrid(np.arange(-n_max, n_max, dn), np.arange(-n_max, n_max, dn))
 px, py = np.meshgrid(np.arange(-p_max, p_max, dp), np.arange(-p_max, p_max, dp))
 x, y = np.meshgrid(np.arange(-x_max, x_max, dx), np.arange(-x_max, x_max, dx))
 
-for C40 in [0, 0.29, 0.5, 0.29, 0.31]:
+for C40 in [0, 0.39, 0.67, 0.535, 0.64]:
     zr = func_Circ(px, py, N, 1)
     zr_abb = make_abb(zr, px, py, C40)
 
@@ -66,16 +66,16 @@ for C40 in [0, 0.29, 0.5, 0.29, 0.31]:
     plt.grid(True)
     plt.xlabel("x', µm")
     plt.title('PSF cross-section')
-    text = f'c40 = {C40:.2f}, st = {st:.2f}'
+    text = f'c40 = {C40:.2f}'
     plt.legend(['Without aberrations', text])
 
     plt.subplot(1, 2, 2)
-    plt.pcolor(x, y, psf_abb)
+    plt.pcolormesh(x, y, psf_abb, cmap='gray')
     plt.axis('equal')
     plt.axis([-x_max / 4, x_max / 4, -x_max / 4, x_max / 4])
     plt.xlabel("x', µm")
     plt.ylabel("y', µm")
-    text = f'PSF, c40 = {C40:.2f}, st = {st:.2f}'
+    text = f'PSF, c40 = {C40:.2f}'
     plt.title(text)
 
     # Plot MTF
@@ -86,12 +86,12 @@ for C40 in [0, 0.29, 0.5, 0.29, 0.31]:
     plt.xlim([0, 2])
     plt.grid(True)
     plt.xlabel('sx, sy, cycles/µm')
-    text = f'MTF, c40 = {C40:.2f}, st = {st:.2f}'
+    text = f'MTF, c40 = {C40:.2f}'
     plt.title(text)
     plt.pause(0.1)
 
 plt.show()
 
-# Function to add spherical aberration
+
 
 
