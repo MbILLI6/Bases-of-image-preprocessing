@@ -15,7 +15,7 @@ def comb(x, n):   #needs list of x and length N
     f_comb = np.zeros(n)
     for i in range(n):
         if x[i] % 1 == 0:
-            f_comb[i] = x[i]
+            f_comb[i] = 1
     return f_comb
 
 
@@ -48,11 +48,11 @@ comb = comb(x, N)
 y_comb = fft(comb)/(N ** 0.5)
 
 rect_func = rect(x)
-rect_func = fftshift(rect_func)
-y_rect = fftshift(fft(rect_func)) / (N ** 0.5)
+rect_func1 = fftshift(rect_func)
+y_rect = fftshift(fft(rect_func1)) / (N ** 0.5)
 
-tr = tr(N)
-y_tr = fftshift(fft(tr))/(N ** 0.5)
+triangular = tr(N)
+y_tr = fftshift(fft(fftshift(triangular))) / (N ** 0.5)
 
 sin = sin(x)
 y_sin = fftshift(fft(sin))/(N ** 0.5)
@@ -96,12 +96,13 @@ plt.legend()
 
 plt.figure(4)
 plt.subplot(211)
-plt.plot(x_tr, tr)
+plt.plot(x_tr, triangular)
 plt.grid(True)
 plt.subplot(212)
 plt.plot(x_tr, y_tr, label='Function')
 plt.plot(x, np.real(y_tr), label='Real')
 plt.plot(x, np.imag(y_tr), label='Imaginary')
+plt.xlim([-0.5, 0.5])
 plt.grid(True)
 plt.legend()
 
@@ -129,9 +130,9 @@ plt.legend()
 plt.show()
 
 rect1 = rect(x-1)
-rect1 = fftshift(rect1)
-y_rect1 = fftshift(fft(rect1)) / (N ** 0.5)
-yi_rect1 = fftshift(ifft(rect1)) * (N ** 0.5)
+rect11 = fftshift(rect1)
+y_rect1 = fftshift(fft(rect11)) / (N ** 0.5)
+yi_rect1 = fftshift(ifft(rect11)) * (N ** 0.5)
 
 plt.figure(7)
 plt.subplot(222)
@@ -150,9 +151,9 @@ plt.grid(True)
 plt.legend()
 
 rect2 = rect(x+1)
-rect2 = fftshift(rect2)
-y_rect2 = fftshift(fft(rect2)) / (N ** 0.5)
-yi_rect2 = fftshift(ifft(rect2)) * (N ** 0.5)
+rect21 = fftshift(rect2)
+y_rect2 = fftshift(fft(rect21)) / (N ** 0.5)
+yi_rect2 = fftshift(ifft(rect21)) * (N ** 0.5)
 
 plt.figure(8)
 plt.subplot(222)
@@ -171,8 +172,8 @@ plt.grid(True)
 plt.legend()
 
 rect3 = rect(x*2)
-rect3 = fftshift(rect3)
-y_rect3 = fftshift(fft(rect3)) / (N ** 0.5)
+rect31 = fftshift(rect3)
+y_rect3 = fftshift(fft(rect31)) / (N ** 0.5)
 plt.figure(9)
 plt.subplot(211)
 plt.plot(x, rect3)
@@ -184,8 +185,8 @@ plt.plot(x, np.imag(y_rect3), label='Imaginary')
 plt.grid(True)
 
 rect4 = rect(x/2)
-rect4 = fftshift(rect4)
-y_rect4 = fftshift(fft(rect4)) / (N ** 0.5)
+rect41 = fftshift(rect4)
+y_rect4 = fftshift(fft(rect41)) / (N ** 0.5)
 plt.figure(10)
 plt.subplot(211)
 plt.plot(x, rect4)
@@ -197,8 +198,8 @@ plt.plot(x, np.imag(y_rect4), label='Imaginary')
 plt.grid(True)
 
 rect5 = 1 - rect(x)
-rect5 = fftshift(rect5)
-y_rect5 = fftshift(fft(rect5)) / (N ** 0.5)
+rect51 = fftshift(rect5)
+y_rect5 = fftshift(fft(rect51)) / (N ** 0.5)
 plt.figure(11)
 plt.subplot(211)
 plt.plot(x, rect5)
